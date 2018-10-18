@@ -1,0 +1,141 @@
+#!/bin/bash
+
+source $(dirname $0)/panel_config
+source $(dirname $0)/profile
+
+volume(){
+    VOLUME=$(pulseaudio-ctl full-status | awk '{split($0, array, " ")} END{print array[1]}')
+    MUTE=$(pulseaudio-ctl full-status | awk '{split($0, array, " ")} END{print array[2]}')
+    if [ "$MUTE" == "yes" ]; then
+        #echo "%{F$GRAY3_COLOR B$BLACK_COLOR A:pulseaudio-ctl mute:}$(printf '%b' "\ue04f") %$VOLUME%{A F B}"
+        echo "%{F$WHITE_COLOR B$BLACK_COLOR A:pulseaudio-ctl mute:}$(printf '%b' "\ue04f")%{A F B}%{F$GRAY3_COLOR B$BLACK_COLOR} %$VOLUME%{F B}"
+    else
+        echo "%{F$WHITE_COLOR B$BLACK_COLOR A:pulseaudio-ctl mute:}$(printf '%b' "\ue05d")%{A F B}%{F$GRAY1_COLOR B$BLACK_COLOR} %$VOLUME%{F B}"
+    fi
+}
+
+mpd(){
+    #STATUS=$(mpc current | sed 's/\;/, /g' | zscroll -l 40 -d 0.5 -s true -n true) #Mopidy fix
+	STATUS=$(mpc current | sed 's/\;/, /g') #Mopidy fix
+	PLAYING=$(mpc status | awk 'NR==2{print $1}')
+	mpdicon=""
+	control=""
+    if [ -n "$STATUS" ]; then
+		if [[ $PLAYING == "[playing]" ]]; then
+			mpdicon="\ue059"
+			mpdcolor=$GRAY1_COLOR
+			control=pause
+			#STATUS=$(echo $STATUS | skroll -d 0.3 -r)
+		else
+			mpdicon="\ue058"
+			mpdcolor=$GRAY3_COLOR
+			control=play
+		fi
+		echo "%{F$WHITE_COLOR B$BLACK_COLOR A:mpc $control:}$(printf '%b' "\ue05c")%{A F B}%{F$mpdcolor B$BLACK_COLOR A:mpc $control:} $STATUS%{A F B}"
+    else
+ 	    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue05c")%{F B}%{F$GRAY3_COLOR B$BLACK_COLOR} Ezer ez%{F B}"
+        #echo "%{F$GRAY3_COLOR B$BLACK_COLOR A:sh ~/musicbar/main.sh: A3:mpc stop:}$(printf '%b' "\ue05c") Ezer ez%{A F B}%{A F B}"
+        #echo "%{F%GRAY2_COLOR}$(printf '%b' "\ue05c") Ez dago ezer erreproduzitzen"
+    fi
+}
+
+wifi_ssid(){
+    NAME=$(/sbin/iwconfig wlp6s0 | grep 'ESSID:' | awk '{print $4}' | sed 's/ESSID://g' | sed 's/"//g')
+	QUALITY=$(/sbin/iwconfig wlp6s0 | grep "Link Quality=" | awk '{print $2}' | sed 's/[^0-9]*//' | sed 's/\// /g' | awk '{print int($1/$2 * 100)}')
+    if [ "$NAME" == "off/any" ]; then
+        #echo "%{F$GRAY3_COLOR}$(printf '%b' "\ue217") kon. ez%{F B}"
+	echo "%{F$WHITE_COLOR}$(printf '%b' "\ue217")%{F} %{F$GRAY3_COLOR}kon. ez%{F}"
+    else 
+		wifiicon=""
+		if [[ $QUALITY -lt 33 ]]; then
+			wifiicon="\ue049"
+		elif [[ $QUALITY -lt 66 ]]; then
+			wifiicon="\ue04a"
+		else
+			wifiicon="\ue04b"
+		fi
+		echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' $wifiicon)%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}$NAME%{F B}" 
+    fi
+}
+
+battery() {
+    BAT=$(acpi -b | awk '{gsub(/%,/,""); print $4}' | sed 's/%//g')
+    STATUS=$(acpi -b | awk '{gsub(/,/,""); print $3}')
+    icon=""
+    batterycolor=""
+    if [[ $STATUS == "Discharging" ]]; then
+        if [[ $BAT -lt 12 ]]; then
+            icon="\ue1fd"
+	    batterycolor="$RED_COLOR"
+        elif [[ $BAT -lt 50 ]]; then
+            icon="\ue1fe"
+	    batterycolor="$YELLOWBAT_COLOR"
+        else
+            icon="\ue1ff"
+	    batterycolor="$GREENBAT_COLOR"
+        fi
+    elif [[ $STATUS == "Full"  ]]; then
+        icon="\ue201"
+        batterycolor="$GREENBAT_COLOR"
+    else
+        icon="\ue200"
+        if [[ $BAT -lt 12 ]]; then
+	    batterycolor="$RED_COLOR"
+        elif [[ $BAT -lt 50 ]]; then
+	    batterycolor="$YELLOWBAT_COLOR"
+        else
+	    batterycolor="$GREENBAT_COLOR"
+        fi
+    fi
+    echo "%{F$batterycolor B$BLACK_COLOR}$(printf '%b' $icon)%{F B}%{F$GRAY1_COLOR B$BLACK_COLOR} %$BAT%{F B}"
+}
+
+cpu() {
+    CPU=$(mpstat | grep -A 5 "%idle" | tail -n 1 | awk -F " " '{print 100 - $ 12}'a)
+    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue026")%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}%$CPU%{F B}"
+}
+
+ram_percentage() {
+    RAM=$(free -m | awk 'FNR ==2 {printf "%.0f\n", $3/($3+$4)*100}')
+    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue021")%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}%$RAM%{F B}"
+}
+
+ram_total() {
+    RAM2=$(free -m | awk 'FNR ==2 {printf "%0.2fG\n", ($3 + $5)/1000}' | sed 's/\./\,/g')
+    #RAM2=$(free -m | awk 'FNR ==2 {printf "%0.2fG\n", ($3 + $5)/1000}')
+	#RAM2=$(free -m | awk 'FNR==2{shared=$5;buffers=$6} FNR==3{used=$3} FNR==4{swap=$3} END {printf "%0.2fG\n", (used-shared-buffers-swap)/1000}')
+    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue021")%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}$RAM2%{F B}"
+}
+
+load_avg() {
+    AVGLOAD=$(cut -d " " -f 1-3 /proc/loadavg)
+    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue020")%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}$AVGLOAD%{F B}"
+}
+
+temp() {
+    #TEMP=$(sensors | grep "temp1" | awk 'NR==2{print $2}' | sed 's/\+//g')
+    TEMP=$(sensors | grep "temp1" | awk 'NR==2{print $2}' | sed 's/\+//g' | sed 's/\.[0-9]//g')
+    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue01c")%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}$TEMP%{F B}"
+}
+
+day() {
+    #DATE=$(date +'%a, %Y.eko %b. %-da %H:%M')
+    DATE=$(date +'%a, %Y.eko %b. %-da %H:%M')
+    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue015")%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}$DATE %{F B}"
+}
+
+short_day() {
+    SHORTDATE=$(date +'%a, %b. %-d %H:%M')
+    echo "%{F$WHITE_COLOR B$BLACK_COLOR}$(printf '%b' "\ue015")%{F B} %{F$GRAY1_COLOR B$BLACK_COLOR}$SHORTDATE %{F B}"
+}
+
+disk_usage() {
+	USAGE=$(df -hl | awk '/^\/dev\/sd[ab]/ {sum+=$5} END {print "%"sum}')
+	echo "%{F$GRAY1_COLOR}$(printf '%b' "\ue02b") $USAGE %{F}"
+}
+
+while :; do
+	#echo "S%{r} $(mpd) $(volume) $(temp) $(cpu) $(ram_total) $(wifi_ssid) $(battery) $(short_day)"
+	echo "S%{r} $(mpd) $(volume) $(wifi_ssid) $(battery) $(day)"
+sleep 2
+done

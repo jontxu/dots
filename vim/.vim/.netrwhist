@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/jon/Code/pyfrugal'
+let g:netrw_dirhist_2='/home/jon/.config/bspwm'
+let g:netrw_dirhist_3='/home/jon/myweb/templates'
+let g:netrw_dirhist_4='/home/jon/pvol2/src/main/java/pvol2/action'
+let g:netrw_dirhist_5='/home/jon/pvol2/src/main/java/pvol2'
+let g:netrw_dirhist_6='/home/jon/pvol2/src/main/java'
