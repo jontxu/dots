@@ -6,5 +6,5 @@ pulseaudio &
 compton &
 mopidy &
 wmname LG3D
-feh --bg-center /home/jon/pics/Wallpapers/M106.jpeg
+feh --bg-center /home/jon/pics/walls/M106.jpeg
 exec bspwm -c /home/jon/.config/bspwm/bspwmrc 2> /home/jon/.bspwm.log

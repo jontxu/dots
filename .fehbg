@@ -1,2 +1,3 @@
 #!/bin/sh
-feh --bg-center '/home/jon/Irudiak/Wallpapers/M106.jpeg' 
+feh --bg-center '/home/jon/pics/walls/M106.jpeg' 
+
