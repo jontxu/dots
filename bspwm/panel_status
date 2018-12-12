@@ -43,8 +43,7 @@ wifi_ssid(){
     NAME=$(/sbin/iwconfig wlp6s0 | grep 'ESSID:' | awk '{print $4}' | sed 's/ESSID://g' | sed 's/"//g')
 	QUALITY=$(/sbin/iwconfig wlp6s0 | grep "Link Quality=" | awk '{print $2}' | sed 's/[^0-9]*//' | sed 's/\// /g' | awk '{print int($1/$2 * 100)}')
     if [ "$NAME" == "off/any" ]; then
-        #echo "%{F$GRAY3_COLOR}$(printf '%b' "\ue217") kon. ez%{F B}"
-	echo "%{F$WHITE_COLOR}$(printf '%b' "\ue217")%{F} %{F$GRAY3_COLOR}kon. ez%{F}"
+	    echo "%{F$WHITE_COLOR}$(printf '%b' "\ue217")%{F} %{F$GRAY3_COLOR}kon. ez%{F}"
     else 
 		wifiicon=""
 		if [[ $QUALITY -lt 33 ]]; then
@@ -135,7 +134,7 @@ disk_usage() {
 }
 
 while :; do
-	#echo "S%{r} $(mpd) $(volume) $(temp) $(cpu) $(ram_total) $(wifi_ssid) $(battery) $(short_day)"
-	echo "S%{r} $(mpd) $(volume) $(wifi_ssid) $(battery) $(day)"
+	#echo "S%{r} $(mpd) $(volume) $(temp) $(cpu) $(ram_total) $(wifi_ssid) $(battery) $(day)"
+	echo "S%{r} $(mpd) $(volume) $(cpu) $(ram_total) $(wifi_ssid) $(battery) $(short_day)"
 sleep 2
 done

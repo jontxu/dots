@@ -34,18 +34,17 @@ URxvt.lineSpace:            0
 ! Fonts
 URxvt.allow_bold:           true
 
-!URxvt.font:xft:envypn-powerline:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:size=13:antialiast=true:hinting=true
-!URxvt.boldFont:xft:envypn-powerline:style=bold:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=bold:size=13:antialiast=true:hinting=true
-!URxvt.imFont:xft:envypn-powerline:style=regular:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=regular:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=regular:size=13:antialiast=true:hinting=true
-!URxvt.italicFont:xft:envypn-powerline:style=italic:pizelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=italic:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=italic:size=13:antialiast=true:hinting=true
-!URxvt.boldItalicFont:xft:envypn-powerline:style=bold italic:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold italic:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=bold italic:size=13:antialiast=true:hinting=true
+URxvt.font:xft:envypn-powerline:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:size=13:antialiast=true:hinting=true
+URxvt.boldFont:xft:envypn-powerline:style=bold:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=bold:size=13:antialiast=true:hinting=true
+URxvt.imFont:xft:envypn-powerline:style=regular:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=regular:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=regular:size=13:antialiast=true:hinting=true
+URxvt.italicFont:xft:envypn-powerline:style=italic:pizelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=italic:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=italic:size=13:antialiast=true:hinting=true
+URxvt.boldItalicFont:xft:envypn-powerline:style=bold italic:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold italic:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=bold italic:size=13:antialiast=true:hinting=true
 
-
-URxvt.font:xft:tamsyn:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:size=13:antialiast=true:hinting=true
-URxvt.boldFont:xft:tamsyn:style=bold:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=bold:size=13:antialiast=true:hinting=true
-URxvt.imFont:xft:tamsyn:style=regular:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=regular:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=regular:size=13:antialiast=true:hinting=true
-URxvt.italicFont:xft:tamsyn:style=italic:pizelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=italic:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=italic:size=13:antialiast=true:hinting=true
-URxvt.boldItalicFont:xft:tamsyn:style=bold italic:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold italic:size=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=bold italic:size=13:antialiast=true:hinting=true
+!URxvt.font:xft:tamsyn:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:pixelsize=14:antialiast=true:hinting=true,xft:Powerline Symbols:pixelsize=14:antialiast=true:hinting=true
+!URxvt.boldFont:xft:tamsyn:style=bold:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold:pixelsize=14:antialias=true:hinting=true,xft:Powerline Symbols:style=bold:pixelsize=14:antialias=true:hinting=true
+!URxvt.imFont:xft:tamsyn:style=regular:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=regular:pixelsize=14:antialiast=true:hinting=true,xft:Powerline Symbols:style=regular:pixelsize=14:antialiast=true:hinting=true
+!URxvt.italicFont:xft:tamsyn:style=italic:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=italic:pixelsize=14:antialias=true:hinting=true,xft:Powerline Symbols:style=italic:pixelsize=14:antialias=true:hinting=true
+!URxvt.boldItalicFont:xft:tamsyn:style=bold italic:pixelsize=14:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold italic:pixelsize=14:antialias=true:hinting=true,xft:Powerline Symbols:style=bold italic:pixelsize=14:antialias=true:hinting=true
 
 !URxvt.font:xft:tamsyn:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:pixelsize=13:antialiast=true:hinting=true,xft:Powerline Symbols:pixelsize=13:antialiast=true:hinting=true
 !URxvt.boldFont:xft:tamsyn:style=bold:pixelsize=13:antialias=true:hinting=true,xft:TamzenForPowerline:style=bold:pixelsize=13:antialiast=true:hinting=true,xft:Powerline Symbols:style=bold:pixelsize=13:antialiast=true:hinting=true
